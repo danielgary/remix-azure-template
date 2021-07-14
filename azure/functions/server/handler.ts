@@ -15,6 +15,8 @@ installGlobals();
 import { resolve } from "path";
 import { readdir } from "fs/promises";
 
+const PUBLIC_CACHE_SECONDS = 60 * 60 * 24 * 7;
+
 async function* getFiles(dir: string): AsyncGenerator<string> {
   const entries = await readdir(dir, { withFileTypes: true });
   for (const entry of entries) {
@@ -63,10 +65,12 @@ export function createRequestHandler({ build, mode = process.env.NODE_ENV }) {
     if (PUBLIC_FILES[pathName]) {
       const stat = fs.statSync(PUBLIC_FILES[pathName]);
       const buffer = fs.readFileSync(PUBLIC_FILES[pathName]);
+
       context.res = {
         status: 200,
         isRaw: true,
         headers: {
+          "cache-control": `max-age=${PUBLIC_CACHE_SECONDS}`,
           "content-length": stat.size,
         },
         body: buffer,
