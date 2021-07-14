@@ -27,10 +27,6 @@ async function* getFiles(dir: string): AsyncGenerator<string> {
 }
 
 function createRemixRequest(req) {
-  const host = req.headers["x-forwarded-host"] || req.headers.host;
-  const proto = req.headers["x-forwarded-proto"] || "http";
-  const query = stringify(req.multiValueQueryStringParameters);
-
   let body;
   if (req.body && req.httpMethod !== "get" && req.httpMethod !== "head") {
     body = req.isBase64Encoded
@@ -57,14 +53,12 @@ export function createRequestHandler({ build, mode = process.env.NODE_ENV }) {
   (async () => {
     for await (const f of getFiles(ROOT_DIR)) {
       const fileName = path.relative(ROOT_DIR, f).replace(/\\/g, "/");
-
       PUBLIC_FILES[`/build/${fileName}`] = f;
     }
   })();
 
   return async (context) => {
     const pathName = new URL(context.req.url).pathname;
-    console.log(`Looking for ${pathName} in ${Object.keys(PUBLIC_FILES)}`);
     if (PUBLIC_FILES[pathName]) {
       context.res = {
         status: 200,
@@ -72,7 +66,6 @@ export function createRequestHandler({ build, mode = process.env.NODE_ENV }) {
       };
     } else {
       const response = await handleRequest(createRemixRequest(context.req));
-
       const text = await response.text();
 
       context.res = {
