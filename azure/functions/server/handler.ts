@@ -4,10 +4,11 @@ import {
   installGlobals,
 } from "@remix-run/node";
 
+import { Context } from "@azure/functions";
+
 import path from "path";
 import fs from "fs";
-
-import { stringify } from "querystring";
+import stream from "stream";
 
 installGlobals();
 
@@ -47,22 +48,28 @@ function createRemixRequest(req) {
 
 export function createRequestHandler({ build, mode = process.env.NODE_ENV }) {
   const handleRequest = createNodeRequestHandler(build, mode);
-  const ROOT_DIR = path.resolve(__dirname, "../../../public/build");
+  const ROOT_DIR = path.resolve(__dirname, "../../../public");
   const PUBLIC_FILES: { [key: string]: string } = {};
 
   (async () => {
     for await (const f of getFiles(ROOT_DIR)) {
       const fileName = path.relative(ROOT_DIR, f).replace(/\\/g, "/");
-      PUBLIC_FILES[`/build/${fileName}`] = f;
+      PUBLIC_FILES[`${fileName}`] = f;
     }
   })();
 
-  return async (context) => {
-    const pathName = new URL(context.req.url).pathname;
+  return async (context: Context) => {
+    const pathName = new URL(context.req!.url).pathname.substr(1);
     if (PUBLIC_FILES[pathName]) {
+      const stat = fs.statSync(PUBLIC_FILES[pathName]);
+      const buffer = fs.readFileSync(PUBLIC_FILES[pathName]);
       context.res = {
         status: 200,
-        body: fs.readFileSync(PUBLIC_FILES[pathName]),
+        isRaw: true,
+        headers: {
+          "content-length": stat.size,
+        },
+        body: buffer,
       };
     } else {
       const response = await handleRequest(createRemixRequest(context.req));
