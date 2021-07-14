@@ -1,0 +1,23 @@
+{
+    "bindings": [
+      {
+        "authLevel": "Anonymous",
+        "type": "httpTrigger",
+        "direction": "in",
+        "name": "req",
+        "routePrefix": "",
+        "route": "{*path}",
+        "methods": [
+          "get",
+          "post"
+        ]
+      },
+      {
+        "type": "http",
+        "direction": "out",
+        "name": "res"
+      }
+    ],
+
+    "scriptFile": "./functions/server/server.js"
+  }
