@@ -3,6 +3,10 @@
 - [Remix Docs](https://docs.remix.run)
 - [Customer Dashboard](https://remix.run/dashboard)
 
+## Before development
+
+You'll need to be setup for Azure Function development. Most importantly, install the Azure Functions Core Tools. Follow the steps here: [Install the Azure Functions Core Tools](https://docs.microsoft.com/en-us/azure/azure-functions/functions-run-local?tabs=windows%2Ccsharp%2Cbash#install-the-azure-functions-core-tools)
+
 ## Development
 
 From your terminal:
@@ -29,26 +33,12 @@ npm start
 
 Now you'll need to pick a host to deploy it to.
 
-### DIY
+### Running as an Azure Function locally
 
-If you're familiar with deploying node applications, the built-in Remix app server is production-ready.
+Once you've run `npm run build` you can run `func start`
 
-Make sure to deploy the output of `remix build`
+At this point your app should be available at `http://localhost:7071`
 
-- `build/`
-- `public/build/`
+### Deploying to Azure Functions
 
-### Using a Template
-
-When you ran `npm init remix` there were a few choices for hosting. You can run that again to create a new project, then copy over your `app/` folder to the new project that's pre-configured for your target server.
-
-```sh
-cd ..
-# create a new project, and pick a pre-configured host
-npm init remix
-cd my-new-remix-app
-# remove the new project's app (not the old one!)
-rm -rf app
-# copy your app over
-cp -R ../my-old-remix-app/app app
-```
+Follow the instructions for deploying any other Azure function. Just make sure all the contents of the **azure** folder and **public** folder get deployed as well.

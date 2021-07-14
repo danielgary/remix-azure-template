@@ -1,10 +1,10 @@
 {
   "private": true,
-  "name": "remix-app-template",
+  "name": "remix-azure-function-template",
   "description": "",
   "license": "",
   "scripts": {
-    "build": "remix build",
+    "build": "remix build && npm run predeploy",
     "predeploy": "tsc -p ./server.tsconfig.json",
     "dev": "remix run",
     "start": "remix-serve azure/functions/server/build"
