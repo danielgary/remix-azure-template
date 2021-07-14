@@ -5,10 +5,9 @@ import {
 } from "@remix-run/node";
 
 import { Context } from "@azure/functions";
-
+import zlib from "zlib";
 import path from "path";
 import fs from "fs";
-import stream from "stream";
 
 installGlobals();
 
@@ -63,15 +62,15 @@ export function createRequestHandler({ build, mode = process.env.NODE_ENV }) {
   return async (context: Context) => {
     const pathName = new URL(context.req!.url).pathname.substr(1);
     if (PUBLIC_FILES[pathName]) {
-      const stat = fs.statSync(PUBLIC_FILES[pathName]);
-      const buffer = fs.readFileSync(PUBLIC_FILES[pathName]);
+      const buffer = zlib.gzipSync(fs.readFileSync(PUBLIC_FILES[pathName]));
 
       context.res = {
         status: 200,
         isRaw: true,
         headers: {
           "cache-control": `max-age=${PUBLIC_CACHE_SECONDS}`,
-          "content-length": stat.size,
+          "content-encoding": "gzip",
+          "content-length": buffer.length,
         },
         body: buffer,
       };

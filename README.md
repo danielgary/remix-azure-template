@@ -1,5 +1,9 @@
 # Welcome to Remix!
 
+#### Hat tip to [@ascorbic](https://github.com/ascorbic/remix-on-netlify/) for his Netlify Template
+
+## Documents
+
 - [Remix Docs](https://docs.remix.run)
 - [Customer Dashboard](https://remix.run/dashboard)
 
