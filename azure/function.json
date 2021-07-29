@@ -1,23 +1,19 @@
 {
-    "bindings": [
-      {
-        "authLevel": "Anonymous",
-        "type": "httpTrigger",
-        "direction": "in",
-        "name": "req",
-        "routePrefix": "",
-        "route": "{*path}",
-        "methods": [
-          "get",
-          "post"
-        ]
-      },
-      {
-        "type": "http",
-        "direction": "out",
-        "name": "res"
-      }
-    ],
+  "bindings": [
+    {
+      "authLevel": "Anonymous",
+      "type": "httpTrigger",
+      "direction": "in",
+      "name": "req",
 
-    "scriptFile": "./functions/server/server.js"
-  }
+      "methods": ["get", "post", "put", "delete"]
+    },
+    {
+      "type": "http",
+      "direction": "out",
+      "name": "res"
+    }
+  ],
+
+  "scriptFile": "./function/server/server.js"
+}
