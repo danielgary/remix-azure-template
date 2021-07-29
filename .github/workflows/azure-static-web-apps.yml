@@ -20,6 +20,8 @@ jobs:
           submodules: true
       - name: Move npmrc
         run: mv ./.npmrc-production ./.npmrc
+      - name: Move placeholder.html
+        run: mv ./public/placeholder.html ./public/index.html
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1

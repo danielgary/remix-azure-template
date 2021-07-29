@@ -37,7 +37,9 @@ export default function App() {
     <Document>
       <Outlet />
       <footer>
-        <p>This page was rendered at {data.date.toLocaleString()}</p>
+        <p>
+          This page was rendered by 🌩️ Azure 🌩️ at {data.date.toLocaleString()}
+        </p>
       </footer>
     </Document>
   );
