@@ -1,0 +1,15 @@
+{
+  "routes": [
+    {
+      "route": "/",
+      "rewrite": "/api/function"
+    },
+    {
+      "route": "/index.html",
+      "rewrite": "/api/function"
+    }
+  ],
+  "navigationFallback": {
+    "rewrite": "/api/function"
+  }
+}
