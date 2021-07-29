@@ -69,5 +69,5 @@
     "skipLibCheck": true /* Skip type checking of declaration files. */,
     "forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file. */
   },
-  "exclude": ["azure/functions/server/build", "app/"]
+  "exclude": ["function/server/build", "app/"]
 }

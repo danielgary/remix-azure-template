@@ -2,6 +2,6 @@ module.exports = {
   appDirectory: "app",
   browserBuildDirectory: "public/build",
   publicPath: "/build/",
-  serverBuildDirectory: "azure/functions/server/build",
-  devServerPort: 7071
+  serverBuildDirectory: "function/server/build",
+  devServerPort: 7071,
 };

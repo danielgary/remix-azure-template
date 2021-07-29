@@ -7,7 +7,9 @@
     "build": "remix build && npm run predeploy",
     "predeploy": "tsc -p ./server.tsconfig.json",
     "dev": "remix run",
-    "start": "remix-serve azure/functions/server/build"
+    "swa": "swa start ./public --api ./",
+    "preswa": "npm run build",
+    "start": "remix-serve function/server/build"
   },
   "dependencies": {
     "@remix-run/node": "^0.17.5",
