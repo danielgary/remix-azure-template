@@ -33,7 +33,7 @@ jobs:
           api_location: "/" # Api source code path - optional
           output_location: "/public" # Built app content directory - optional
           app_build_command: npx remix build
-          api_build_command: tsc -p ./server.tsconfig.json
+          api_build_command: npx tsc -p ./server.tsconfig.json
           ###### End of Repository/Build Configurations ######
 
   close_pull_request_job:
