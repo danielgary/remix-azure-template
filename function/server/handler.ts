@@ -21,7 +21,6 @@ function createRemixRequest(req) {
   }
 
   const originalUrl = req.headers["x-ms-original-url"];
-  console.log(req.url);
   return new Request(originalUrl, {
     method: req.httpMethod,
     headers: req.headers,
@@ -33,7 +32,6 @@ export function createRequestHandler({ build, mode = process.env.NODE_ENV }) {
   const handleRequest = createNodeRequestHandler(build, mode);
 
   return async (context: Context) => {
-    console.log(context);
     const response = await handleRequest(createRemixRequest(context.req));
     const text = await response.text();
 

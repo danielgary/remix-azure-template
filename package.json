@@ -7,8 +7,8 @@
     "build": "remix build && npm run predeploy",
     "predeploy": "tsc -p ./server.tsconfig.json",
     "dev": "remix run",
-    "swa": "swa start ./public --api ./",
-    "preswa": "npm run build",
+    "azurelocal": "swa start ./public --api ./",
+    "preazurelocal": "npm run build",
     "start": "remix-serve function/server/build"
   },
   "dependencies": {
@@ -18,8 +18,7 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router-dom": "^6.0.0-beta.0",
-    "remix": "^0.17.5",
-    "zlib": "^1.0.5"
+    "remix": "^0.17.5"
   },
   "devDependencies": {
     "@azure/functions": "^1.0.1-beta1",
