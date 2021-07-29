@@ -15,5 +15,5 @@
     }
   ],
 
-  "scriptFile": "./function/server/server.js"
+  "scriptFile": "./server/server.js"
 }
