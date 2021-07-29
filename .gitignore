@@ -3,5 +3,4 @@ node_modules
 /.cache
 /build
 /public/build
-azure/**/*.js
-azure/functions/server/build
+function/**/*.js
