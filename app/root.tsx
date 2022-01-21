@@ -1,5 +1,5 @@
-import type { LinksFunction, LoaderFunction } from "remix";
-import { Meta, Links, Scripts, useRouteData, LiveReload } from "remix";
+import type { AppData, LinksFunction, LoaderFunction } from "remix";
+import { Meta, Links, Scripts, LiveReload } from "remix";
 import { Outlet } from "react-router-dom";
 
 import stylesUrl from "./styles/global.css";
@@ -32,13 +32,12 @@ function Document({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  let data = useRouteData();
   return (
     <Document>
       <Outlet />
       <footer>
         <p>
-          This page was rendered by 🌩️ Azure 🌩️ at {data.date.toLocaleString()}
+          This page was rendered by 🌩️ Azure 🌩️ at {"data.date.toLocaleString()"}
         </p>
       </footer>
     </Document>
